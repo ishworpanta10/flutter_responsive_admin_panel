@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:responsive_admin_panel/screens/drawer.dart';
 
 import 'responsive_layout.dart';
+import 'screens/drawer.dart';
 import 'widgets/widgets.dart';
 
 class WidgetTree extends StatelessWidget {

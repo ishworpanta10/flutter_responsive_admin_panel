@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:responsive_admin_panel/bloc/ui_blocs/select_drawer_item_bloc.dart';
 
 import '../constants/constants.dart';
 import '../model/models.dart';
 import '../responsive_layout.dart';
-
-int _currentIndex = 0;
 
 List<ButtonsInfo> _buttonNames = [
   ButtonsInfo(title: "Home", icon: Icons.home),
@@ -17,12 +17,7 @@ List<ButtonsInfo> _buttonNames = [
   ButtonsInfo(title: "Users", icon: Icons.supervised_user_circle_rounded),
 ];
 
-class DrawerPage extends StatefulWidget {
-  @override
-  _DrawerPageState createState() => _DrawerPageState();
-}
-
-class _DrawerPageState extends State<DrawerPage> {
+class DrawerPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -43,6 +38,7 @@ class _DrawerPageState extends State<DrawerPage> {
                     ? IconButton(
                         onPressed: () {
                           Navigator.pop(context);
+                          context.read<SelectDrawerItemBloc>().add(-1);
                         },
                         icon: const Icon(Icons.close, color: Colors.white),
                       )
@@ -52,41 +48,43 @@ class _DrawerPageState extends State<DrawerPage> {
                 _buttonNames.length,
                 (index) => Column(
                   children: [
-                    Container(
-                      decoration: index == _currentIndex
-                          ? BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              gradient: LinearGradient(
-                                colors: [
-                                  Constants.red.withOpacity(0.9),
-                                  Constants.orange.withOpacity(0.9),
-                                ],
+                    BlocBuilder<SelectDrawerItemBloc, int>(
+                      builder: (context, selectedItem) {
+                        return Container(
+                          decoration: index == selectedItem
+                              ? BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Constants.red.withOpacity(0.9),
+                                      Constants.orange.withOpacity(0.9),
+                                    ],
+                                  ),
+                                )
+                              : null,
+                          child: ListTile(
+                            title: Text(
+                              _buttonNames[index].title,
+                              style: const TextStyle(
+                                color: Colors.white,
                               ),
-                            )
-                          : null,
-                      child: ListTile(
-                        title: Text(
-                          _buttonNames[index].title,
-                          style: const TextStyle(
-                            color: Colors.white,
+                            ),
+                            leading: Padding(
+                              padding: const EdgeInsets.all(Constants.kPadding),
+                              child: Icon(
+                                _buttonNames[index].icon,
+                                color: Colors.white,
+                              ),
+                            ),
+                            onTap: () {
+                              context.read<SelectDrawerItemBloc>().add(index);
+                            },
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
                           ),
-                        ),
-                        leading: Padding(
-                          padding: const EdgeInsets.all(Constants.kPadding),
-                          child: Icon(
-                            _buttonNames[index].icon,
-                            color: Colors.white,
-                          ),
-                        ),
-                        onTap: () {
-                          setState(() {
-                            _currentIndex = index;
-                          });
-                        },
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                      ),
+                        );
+                      },
                     ),
                     const Divider(
                       color: Colors.white,

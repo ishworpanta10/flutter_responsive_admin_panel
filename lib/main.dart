@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:responsive_admin_panel/bloc/ui_blocs/select_drawer_item_bloc.dart';
 
 import 'constants/constants.dart';
 import 'widget_tree.dart';
@@ -10,15 +12,22 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Responsive Admin Panel',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: Constants.purpleDark,
-        canvasColor: Constants.purpleLight,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => SelectDrawerItemBloc(),
+        )
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Responsive Admin Panel',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          scaffoldBackgroundColor: Constants.purpleDark,
+          canvasColor: Constants.purpleLight,
+        ),
+        home: WidgetTree(),
       ),
-      home: WidgetTree(),
     );
   }
 }
