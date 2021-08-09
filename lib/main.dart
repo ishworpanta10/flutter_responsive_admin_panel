@@ -21,6 +21,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (_) => SelectButtonAppBarCubit(),
         ),
+        BlocProvider(
+          create: (_) => ToggleCheckBoxCubit(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

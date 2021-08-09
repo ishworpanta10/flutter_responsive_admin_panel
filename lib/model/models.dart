@@ -14,3 +14,9 @@ class Task {
   double taskValue;
   Color color;
 }
+
+class Todo {
+  Todo({required this.name, this.isEnable = true});
+  String name;
+  bool? isEnable;
+}
