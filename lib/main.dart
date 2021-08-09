@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:responsive_admin_panel/bloc/ui_blocs/select_drawer_item_bloc.dart';
 
+import 'bloc/ui_blocs/select_drawer_item_bloc.dart';
 import 'constants/constants.dart';
+import 'cubit/cubit.dart';
 import 'widget_tree.dart';
 
 void main() {
@@ -16,7 +17,10 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (_) => SelectDrawerItemBloc(),
-        )
+        ),
+        BlocProvider(
+          create: (_) => SelectButtonAppBarCubit(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

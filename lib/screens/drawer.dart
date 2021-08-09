@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:responsive_admin_panel/bloc/ui_blocs/select_drawer_item_bloc.dart';
 
+import '../bloc/ui_blocs/select_drawer_item_bloc.dart';
 import '../constants/constants.dart';
 import '../model/models.dart';
 import '../responsive_layout.dart';
@@ -24,7 +24,7 @@ class DrawerPage extends StatelessWidget {
       elevation: 0,
       child: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(Constants.kPadding * 4),
+          padding: const EdgeInsets.only(left: Constants.kPadding * 2),
           child: Column(
             children: [
               ListTile(
@@ -32,6 +32,7 @@ class DrawerPage extends StatelessWidget {
                   "Admin Menu",
                   style: TextStyle(
                     color: Colors.white,
+                    fontSize: 18,
                   ),
                 ),
                 trailing: !ResponsiveLayout.isComputer(context)
@@ -56,8 +57,8 @@ class DrawerPage extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(20),
                                   gradient: LinearGradient(
                                     colors: [
-                                      Constants.red.withOpacity(0.9),
-                                      Constants.orange.withOpacity(0.9),
+                                      Constants.redDark.withOpacity(0.9),
+                                      Constants.orangeDark.withOpacity(0.9),
                                     ],
                                   ),
                                 )
