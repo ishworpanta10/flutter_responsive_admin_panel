@@ -22,79 +22,85 @@ class DrawerPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       elevation: 0,
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(left: Constants.kPadding * 2),
-          child: Column(
-            children: [
-              ListTile(
-                title: const Text(
-                  "Admin Menu",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
+      child: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(left: Constants.kPadding * 2),
+            child: Column(
+              children: [
+                if (!ResponsiveLayout.isComputer(context)) const SizedBox(height: 10) else const SizedBox.shrink(),
+                ListTile(
+                  title: const Text(
+                    "Admin Menu",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                    ),
+                  ),
+                  trailing: !ResponsiveLayout.isComputer(context)
+                      ? IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                            context.read<SelectDrawerItemBloc>().add(-1);
+                          },
+                          icon: const Icon(Icons.close, color: Colors.white),
+                        )
+                      : null,
+                ),
+                ...List.generate(
+                  _buttonNames.length,
+                  (index) => Column(
+                    children: [
+                      BlocBuilder<SelectDrawerItemBloc, int>(
+                        builder: (context, selectedItem) {
+                          return Padding(
+                            padding: const EdgeInsets.only(right: 30),
+                            child: Container(
+                              decoration: index == selectedItem
+                                  ? BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      gradient: LinearGradient(
+                                        colors: [
+                                          Constants.redDark.withOpacity(0.9),
+                                          Constants.orangeDark.withOpacity(0.9),
+                                        ],
+                                      ),
+                                    )
+                                  : null,
+                              child: ListTile(
+                                title: Text(
+                                  _buttonNames[index].title,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                leading: Padding(
+                                  padding: const EdgeInsets.all(Constants.kPadding),
+                                  child: Icon(
+                                    _buttonNames[index].icon,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                onTap: () {
+                                  context.read<SelectDrawerItemBloc>().add(index);
+                                },
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                      const Divider(
+                        color: Colors.white,
+                        thickness: 0.1,
+                      ),
+                    ],
                   ),
                 ),
-                trailing: !ResponsiveLayout.isComputer(context)
-                    ? IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                          context.read<SelectDrawerItemBloc>().add(-1);
-                        },
-                        icon: const Icon(Icons.close, color: Colors.white),
-                      )
-                    : null,
-              ),
-              ...List.generate(
-                _buttonNames.length,
-                (index) => Column(
-                  children: [
-                    BlocBuilder<SelectDrawerItemBloc, int>(
-                      builder: (context, selectedItem) {
-                        return Container(
-                          decoration: index == selectedItem
-                              ? BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Constants.redDark.withOpacity(0.9),
-                                      Constants.orangeDark.withOpacity(0.9),
-                                    ],
-                                  ),
-                                )
-                              : null,
-                          child: ListTile(
-                            title: Text(
-                              _buttonNames[index].title,
-                              style: const TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                            leading: Padding(
-                              padding: const EdgeInsets.all(Constants.kPadding),
-                              child: Icon(
-                                _buttonNames[index].icon,
-                                color: Colors.white,
-                              ),
-                            ),
-                            onTap: () {
-                              context.read<SelectDrawerItemBloc>().add(index);
-                            },
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                    const Divider(
-                      color: Colors.white,
-                      thickness: 0.1,
-                    ),
-                  ],
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

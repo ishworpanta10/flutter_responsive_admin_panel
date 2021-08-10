@@ -16,7 +16,7 @@ class CustomAppBar extends StatelessWidget {
         children: [
           if (ResponsiveLayout.isComputer(context))
             Container(
-              margin: const EdgeInsets.all(Constants.kPadding),
+              margin: const EdgeInsets.only(left: Constants.kPadding * 2.5),
               height: double.infinity,
               decoration: const BoxDecoration(
                 boxShadow: [
