@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
           create: (_) => ToggleCheckBoxCubit(),
         ),
         BlocProvider(
-          create: (_) => PersonToggleCubit(),
+          create: (_) => NavBarToggleCubit(),
         ),
       ],
       child: MaterialApp(

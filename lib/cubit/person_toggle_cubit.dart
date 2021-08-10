@@ -1,5 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class PersonToggleCubit extends Cubit<int> {
-  PersonToggleCubit() : super(0);
+class NavBarToggleCubit extends Cubit<int> {
+  NavBarToggleCubit() : super(0);
+
+  void toggle({required int index}) {
+    emit(index);
+  }
 }
