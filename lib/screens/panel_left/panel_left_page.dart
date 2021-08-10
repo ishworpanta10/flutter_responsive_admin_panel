@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:responsive_admin_panel/cubit/cubit.dart';
-import 'package:responsive_admin_panel/model/models.dart';
 
 import '../../constants/constants.dart';
+import '../../cubit/cubit.dart';
+import '../../model/models.dart';
 import '../../responsive_layout.dart';
+import '../screens.dart';
 
 class PanelLeftPage extends StatelessWidget {
   final List<Todo> _todoList = [
     Todo(name: "Purchase Paper"),
+    Todo(name: "Sales Paper", isEnable: false),
+    Todo(name: "Hiring Employee"),
+    Todo(name: "Marketing campaign", isEnable: false),
+    Todo(name: "Selling digital goods", isEnable: false),
+    Todo(name: "Finish all client Applications"),
   ];
 
   @override
@@ -63,7 +69,9 @@ class PanelLeftPage extends StatelessWidget {
                   ),
                 ),
                 // TODO: Graph 1
+                LineChartSample2(),
                 // TODO: Graph 2
+                PieChartSample2(),
                 Padding(
                   padding: const EdgeInsets.only(
                     left: Constants.kPadding / 2,
@@ -73,21 +81,21 @@ class PanelLeftPage extends StatelessWidget {
                   ),
                   child: Card(
                     color: Constants.purpleLight,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                     elevation: 3,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
                     child: Column(
                       children: [
                         ...List.generate(
                           _todoList.length,
                           (index) {
                             final todo = _todoList[index];
-                            return BlocBuilder<ToggleCheckBoxCubit, bool>(
+                            return BlocBuilder<ToggleCheckBoxCubit, int>(
                               builder: (context, state) {
-                                todo.isEnable = state;
                                 return CheckboxListTile(
-                                  value: state,
+                                  value: todo.isEnable,
                                   onChanged: (value) {
-                                    BlocProvider.of<ToggleCheckBoxCubit>(context).toggle(value: value!);
+                                    BlocProvider.of<ToggleCheckBoxCubit>(context).toggle(value: index);
+                                    todo.isEnable = value;
                                   },
                                   title: Text(
                                     todo.name,

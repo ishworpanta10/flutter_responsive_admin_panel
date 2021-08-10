@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ToggleCheckBoxCubit extends Cubit<bool> {
-  ToggleCheckBoxCubit() : super(false);
+class ToggleCheckBoxCubit extends Cubit<int> {
+  ToggleCheckBoxCubit() : super(-1);
 
-  void toggle({required bool value}) {
+  void toggle({required int value}) {
     emit(value);
   }
 }
