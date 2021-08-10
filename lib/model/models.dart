@@ -29,3 +29,9 @@ class Person {
   String name;
   Color color;
 }
+
+class Product {
+  Product({this.enable = true, required this.name});
+  String name;
+  bool enable;
+}
