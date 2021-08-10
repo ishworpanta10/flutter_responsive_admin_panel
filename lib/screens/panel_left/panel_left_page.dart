@@ -41,7 +41,8 @@ class PanelLeftPage extends StatelessWidget {
                   padding: const EdgeInsets.only(
                     left: Constants.kPadding / 2,
                     right: Constants.kPadding / 2,
-                    top: Constants.kPadding / 2,
+                    top: Constants.kPadding,
+                    bottom: Constants.kPadding,
                   ),
                   child: Card(
                     color: Constants.purpleLight,
@@ -76,7 +77,7 @@ class PanelLeftPage extends StatelessWidget {
                   padding: const EdgeInsets.only(
                     left: Constants.kPadding / 2,
                     right: Constants.kPadding / 2,
-                    top: Constants.kPadding / 2,
+                    top: Constants.kPadding,
                     bottom: Constants.kPadding,
                   ),
                   child: Card(

@@ -20,3 +20,12 @@ class Todo {
   String name;
   bool? isEnable;
 }
+
+class Person {
+  Person({
+    required this.name,
+    required this.color,
+  });
+  String name;
+  Color color;
+}

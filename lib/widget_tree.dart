@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:responsive_admin_panel/widgets/custom_appbar/custom_appbar.dart';
 
 import 'responsive_layout.dart';
 import 'screens/drawer.dart';
 import 'screens/screens.dart';
+import 'widgets/custom_appbar/custom_appbar.dart';
 
 class WidgetTree extends StatelessWidget {
   @override
